@@ -15,12 +15,12 @@ namespace MySpriteClass
         SpriteBatch spriteBatch;
         Texture2D player;
         Texture2D vide;
-        Vector2 position;
+        public Vector2 position;
         Sprite sprite;
         List<Sprite> sprites;
-        Random rnd;
         Map map = new Map();
-        MouseState mouseState;
+        public MouseState lastMouseState { get; private set; }
+        public MouseState currentMouseState { get; private set; }
 
         public Game1()
         {
@@ -49,6 +49,7 @@ namespace MySpriteClass
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sprites = new List<Sprite>();
+            
             player = Content.Load<Texture2D>("assets/images/player");
             vide = Content.Load<Texture2D>("assets/images/vide");
             //position.X = (GraphicsDevice.Viewport.Width / 2) - player.Width / 2;
@@ -94,9 +95,20 @@ namespace MySpriteClass
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            mouseState = Mouse.GetState();
-            Console.WriteLine(mouseState);
 
+            // Test etat du bouton gauche de la souris
+            currentMouseState = Mouse.GetState();
+            bool bClick = false;
+            if (currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+            {
+                bClick = true;
+            }
+            if (bClick)
+                {
+                    Console.WriteLine("Ouille !!");
+                }
+            
+            lastMouseState = currentMouseState;
 
             base.Update(gameTime);
         }

@@ -12,7 +12,7 @@ namespace MySpriteClass
     {
         private Texture2D texture;
         private Vector2 position;
-        private List<Sprite> sprites;
+        public List<Sprite> sprites;
 
         
         public Sprite(Texture2D _texture, Vector2 _position)
@@ -21,7 +21,7 @@ namespace MySpriteClass
             position = _position;
         }
 
-        public List<Sprite> spritess
+        public List<Sprite> getSprites
         {
             get
             {
